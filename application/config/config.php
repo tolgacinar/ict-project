@@ -23,7 +23,12 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 | a PHP script and you can easily do that on your own.
 |
 */
-$config['base_url'] = '';
+$protocol = "http://";
+if (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] != 'off') {
+	$protocol = "https://";
+}
+$domain = $protocol.$_SERVER['SERVER_NAME']."/";
+$config['base_url'] = $domain;
 
 /*
 |--------------------------------------------------------------------------
@@ -35,7 +40,7 @@ $config['base_url'] = '';
 | variable so that it is blank.
 |
 */
-$config['index_page'] = 'index.php';
+$config['index_page'] = '';
 
 /*
 |--------------------------------------------------------------------------
@@ -114,7 +119,7 @@ $config['enable_hooks'] = FALSE;
 | https://codeigniter.com/user_guide/general/creating_libraries.html
 |
 */
-$config['subclass_prefix'] = 'MY_';
+$config['subclass_prefix'] = 'ICT_';
 
 /*
 |--------------------------------------------------------------------------
