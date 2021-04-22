@@ -9,3 +9,13 @@ if (!function_exists("convertEng")) {
 		return str_replace($search, $replace, $text);
 	}
 }
+
+if (!function_exists("cmp")) {
+	
+	function cmp($a, $b) {
+		if ($a->fill == $b->fill) {
+			return 0;
+		}
+		return ($a->fill < $b->fill) ? -1 : 1;
+	}
+}

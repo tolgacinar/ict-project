@@ -53,6 +53,8 @@ $route['default_controller'] = 'main';
 
 // Ajax
 
-$route['send_form'] = "ajax/insert";
+$route['sendForm'] = "main/insert_transaction";
+$route['getCarsBrands/(:num)'] = "main/fetch_models/$1";
+$route['getRepairAreas/(:num)'] = "main/fetch_areas/$1";
 $route['404_override'] = '';
 $route['translate_uri_dashes'] = FALSE;
