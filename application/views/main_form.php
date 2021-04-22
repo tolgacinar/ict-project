@@ -197,7 +197,9 @@
 		$('#main-list').DataTable();
 
 		$('#datepicker').datepicker({
-			uiLibrary: 'bootstrap4'
+			uiLibrary: 'bootstrap4',
+			minDate: '<?php echo date("m/d/Y") ?>',
+			value: '<?php echo date("m/d/Y") ?>'
 		});
 
 		$("select[name=arac]").on("change", function(e) {
@@ -246,7 +248,7 @@
 							modelbox.append(
 								$("<option></option>")
 								.attr("value", value.area_id)
-								.prop("disabled", value.fill >= value.capacity ? true : false)
+								.prop("disabled", value.fill >= value.area_capacity ? true : false)
 								.text(`${value.area_name} (Kapasite: ${value.fill}/${value.area_capacity})`)
 								);
 						});
@@ -261,6 +263,8 @@
 
 		$("form#insertForm").on("submit", function(e) {
 			var form = $(this);
+			var areabox = $("select[name=repair_area]");
+			var modelbox = $("select[name=model]");
 			e.preventDefault();
 			$.ajax({
 				url: base_url + 'sendForm',
@@ -272,6 +276,15 @@
 				success: function(data) {
 					if (data.status == "error") {
 						toastr.error(data.message, 'Hata')
+					}else if(data.status == "success") {
+						toastr.success(data.message, 'Başarılı')
+						areabox.empty();
+						areabox.prop("disabled", true);
+						areabox.append($("<option></option>").text("Tamir Alanı Seçin..."));
+						modelbox.empty();
+						modelbox.prop("disabled", true);
+						modelbox.append($("<option></option>").text("Araç Modeli Seçin..."));
+						form[0].reset();
 					}
 				}
 			});

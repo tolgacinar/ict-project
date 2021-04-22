@@ -44,24 +44,7 @@ class Main extends CI_Controller {
 		if (!$this->input->is_ajax_request()) {
 			die();
 		}else {
-
-			$this->form_validation->set_rules('isim', 'Müşteri Adı', 'trim|required');
-			$this->form_validation->set_rules('date', 'Tamir Tarihi', 'trim|required');
-			$this->form_validation->set_rules('time', 'Tamir Saati', 'trim|required');
-			$this->form_validation->set_rules('arac', 'Araç Markası', 'trim|required');
-			$this->form_validation->set_rules('model', 'Araç Modeli', 'trim|required');
-			$this->form_validation->set_rules('repair_type', 'Tamir Türü', 'trim|required');
-			$this->form_validation->set_rules('repair_area', 'Tamir Noktası', 'trim|required');
-			if ($this->form_validation->run() == FALSE) {
-				$this->output->set_content_type('application/json')->set_output(json_encode([
-					"status"	=>	"error",
-					"message"	=>	validation_errors()
-				]));
-			} else {
-				echo "<pre>";
-				print_r ($this->input->post());
-				echo "</pre>";
-			}
+			$this->output->set_content_type('application/json')->set_output($this->main->insertTransaction());
 		}
 	}
 }
