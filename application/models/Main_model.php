@@ -78,6 +78,7 @@ class Main_model extends CI_Model {
 	public function getTransactions() {
 		return $this->db->select("transaction_id, customer_name, transaction_date, created_at, transaction_status, brand_name, model_name, type_name, area_name")
 		->from("transactions")
+		->order_by("transaction_date", "asc")
 		->where("transaction_status !=", 0)
 		->join("customers", "customers.customer_id = transactions.customer_id")
 		->join("car_brands", "car_brands.brand_id = transactions.brand_id")

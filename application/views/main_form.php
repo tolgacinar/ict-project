@@ -27,8 +27,11 @@
 			</button>
 			<div class="collapse navbar-collapse" id="navbarText">
 				<ul class="navbar-nav mr-auto">
-					<li class="nav-item active">
-						<a class="nav-link" href="#">Anasayfa <span class="sr-only">(current)</span></a>
+					<li class="nav-item">
+						<a class="nav-link" href="<?php echo base_url(); ?>">Anasayfa <span class="sr-only">(current)</span></a>
+					</li>
+					<li class="nav-item">
+						<a class="nav-link" href="<?php echo base_url("reports"); ?>">Raporlar <span class="sr-only">(current)</span></a>
 					</li>
 				</ul>
 			</div>
@@ -194,7 +197,11 @@
 <script>
 	$(document).ready(function() {
 		const base_url = "<?php echo base_url(); ?>";
-		$('#main-list').DataTable();
+		$('#main-list').DataTable({
+			pageLength : 5,
+			lengthMenu: [5, 10, 50],
+			ordering: false
+		});
 
 		$('#datepicker').datepicker({
 			uiLibrary: 'bootstrap4',
