@@ -6,6 +6,7 @@ class Main extends CI_Controller {
 	public function __construct() {
 		parent::__construct();
 		$this->load->model('main_model', "main");
+		$this->load->library('template');
 	}
 
 	public function index() {
@@ -15,7 +16,7 @@ class Main extends CI_Controller {
 			"transactions"	=> $this->main->getTransactions(),
 		];
 
-		$this->load->view("main_form", $data);
+		$this->template->render("main_form", $data);
 	}
 
 	public function fetch_models($brand_id) {
